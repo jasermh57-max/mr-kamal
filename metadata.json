@@ -1,0 +1,8 @@
+{
+  "name": "MR. KAMAL Platform",
+  "description": "Educational platform for Physics - Physics is your game.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
