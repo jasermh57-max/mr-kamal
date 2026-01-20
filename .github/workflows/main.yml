@@ -5,18 +5,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Install dependencies
+          node-version: 20
+      - name: Install Dependencies
         run: npm install
-      - name: Build Project
+      - name: Build Next.js
         run: npm run build
+      - name: Install Capacitor
+        run: npm install @capacitor/core @capacitor/cli @capacitor/android
+      - name: Initialize Capacitor
+        run: npx cap init "My App" "com.example.app" --web-dir out
+      - name: Add Android Platform
+        run: npx cap add android
+      - name: Sync Android
+        run: npx cap sync android
+      - name: Build Android APK
+        run: |
+          cd android && ./gradlew assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: my-app-apk
-          path: ./**/build/outputs/apk/**/*.apk
-          # ملاحظة: إذا كنت تستخدم Capacitor، المسار سيكون مختلفاً قليلاً
+          path: android/app/build/outputs/apk/debug/app-debug.apk
