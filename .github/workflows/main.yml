@@ -12,12 +12,12 @@ jobs:
           node-version: 20
       - name: Install Dependencies
         run: npm install
-      - name: Build Next.js
+      - name: Build Vite Project
         run: npm run build
       - name: Install Capacitor
         run: npm install @capacitor/core @capacitor/cli @capacitor/android
       - name: Initialize Capacitor
-        run: npx cap init "My App" "com.example.app" --web-dir out
+        run: npx cap init "Mr Kamal App" "com.mrkamal.app" --web-dir dist
       - name: Add Android Platform
         run: npx cap add android
       - name: Sync Android
